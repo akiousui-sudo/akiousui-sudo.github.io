@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0f5bd0">
+<title>fp-bits ツール｜有限会社ビッツ</title>
+<style>
+  :root{
+    --bg:#eef2f7; --card:#ffffff; --ink:#1a2333; --sub:#63708a;
+    --line:#e2e8f0; --accent:#0f5bd0; --accent-dark:#0a3f96; --soft:#e8f0fd;
+    --gold:#e0a812;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic UI",sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.6;font-size:15px}
+
+  /* ヘッダー */
+  header{background:linear-gradient(160deg,var(--accent) 0%,var(--accent-dark) 100%);
+    color:#fff;padding:34px 20px 40px;text-align:center}
+  .brand{font-size:30px;font-weight:800;letter-spacing:.5px}
+  .brand small{font-size:15px;font-weight:600;opacity:.9;letter-spacing:.5px}
+  .company{font-size:13px;opacity:.9;margin-top:6px}
+  .lead{font-size:13.5px;opacity:.95;margin-top:14px;max-width:520px;
+    margin-left:auto;margin-right:auto}
+
+  main{max-width:720px;margin:0 auto;padding:26px 16px 40px}
+
+  .sec-label{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;
+    color:var(--sub);margin:26px 4px 12px}
+  .sec-label:first-child{margin-top:6px}
+  .sec-label .badge{font-size:11px;font-weight:700;padding:2px 9px;border-radius:20px}
+  .badge.open{background:#e6f4ea;color:#2a7a45}
+  .badge.member{background:#fdeede;color:#b5730a}
+
+  /* ツールカード */
+  .card{display:flex;align-items:center;gap:15px;background:var(--card);
+    border:1px solid var(--line);border-radius:15px;padding:16px 17px;margin-bottom:11px;
+    text-decoration:none;color:inherit;transition:transform .12s,box-shadow .12s;
+    box-shadow:0 1px 3px rgba(20,40,80,.05)}
+  .card:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(20,40,80,.12)}
+  .icon{flex-shrink:0;width:54px;height:54px;border-radius:14px;display:flex;
+    align-items:center;justify-content:center;font-size:27px;background:var(--soft)}
+  .ctext{flex:1;min-width:0}
+  .ctitle{font-size:16px;font-weight:700}
+  .cdesc{font-size:12.5px;color:var(--sub);margin-top:2px}
+  .arrow{flex-shrink:0;color:var(--accent);font-size:20px;font-weight:700}
+
+  .card.soon{opacity:.62;cursor:default;pointer-events:none}
+  .card.soon .icon{background:#eef1f5}
+  .soon-tag{flex-shrink:0;font-size:11px;font-weight:700;color:var(--sub);
+    background:#eef1f5;padding:3px 10px;border-radius:20px}
+
+  footer{text-align:center;font-size:11.5px;color:var(--sub);padding:20px;line-height:1.8}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">fp-bits<br><small>ファイナンシャル・ツール</small></div>
+  <div class="company">有限会社ビッツ</div>
+  <div class="lead">確定拠出年金・退職金・年金に関する試算ツールをまとめています。ご利用になりたいツールをお選びください。</div>
+</header>
+
+<main>
+
+  <div class="sec-label">どなたでもご利用いただけます <span class="badge open">公開</span></div>
+
+  <a class="card" href="/taishokukin/">
+    <div class="icon">💰</div>
+    <div class="ctext">
+      <div class="ctitle">退職金 受取計算</div>
+      <div class="cdesc">一時金・年金など受取方法ごとの手取りをかんたんに試算</div>
+    </div>
+    <div class="arrow">›</div>
+  </a>
+
+  <div class="card soon">
+    <div class="icon">📊</div>
+    <div class="ctext">
+      <div class="ctitle">在職老齢年金 シミュレーター</div>
+      <div class="cdesc">働きながら受け取る年金の支給額を試算</div>
+    </div>
+    <div class="soon-tag">準備中</div>
+  </div>
+
+  <div class="sec-label">会員向けツール <span class="badge member">合言葉が必要です</span></div>
+
+  <a class="card" href="/ranking/">
+    <div class="icon">🏆</div>
+    <div class="ctext">
+      <div class="ctitle">DC運用商品 ランキング</div>
+      <div class="cdesc">forche・SBIいろどり年金・SBI iDeCoの積立成績を1〜20年で表示</div>
+    </div>
+    <div class="arrow">›</div>
+  </a>
+
+</main>
+
+<footer>
+  © 有限会社ビッツ（fp-bits.com）<br>
+  掲載の試算値は情報提供を目的としたものであり、将来の成果を保証するものではありません。
+</footer>
+
+</body>
+</html>
