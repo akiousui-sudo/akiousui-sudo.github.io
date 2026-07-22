@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0f5bd0">
+<meta name="robots" content="noindex, nofollow">
 <title>fp-bits ツール｜有限会社ビッツ</title>
 <style>
   :root{
@@ -15,7 +16,6 @@
   body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic UI",sans-serif;
     background:var(--bg);color:var(--ink);line-height:1.6;font-size:15px}
 
-  /* ヘッダー */
   header{background:linear-gradient(160deg,var(--accent) 0%,var(--accent-dark) 100%);
     color:#fff;padding:34px 20px 40px;text-align:center}
   .brand{font-size:30px;font-weight:800;letter-spacing:.5px}
@@ -30,13 +30,12 @@
     color:var(--sub);margin:26px 4px 12px}
   .sec-label:first-child{margin-top:6px}
   .sec-label .badge{font-size:11px;font-weight:700;padding:2px 9px;border-radius:20px}
-  .badge.open{background:#e6f4ea;color:#2a7a45}
   .badge.member{background:#fdeede;color:#b5730a}
+  .badge.test{background:#e8eefc;color:#3a5bbf}
 
-  /* ツールカード */
   .card{display:flex;align-items:center;gap:15px;background:var(--card);
     border:1px solid var(--line);border-radius:15px;padding:16px 17px;margin-bottom:11px;
-    text-decoration:none;color:inherit;transition:transform .12s,box-shadow .12s;
+    text-decoration:none;color:inherit;cursor:pointer;transition:transform .12s,box-shadow .12s;
     box-shadow:0 1px 3px rgba(20,40,80,.05)}
   .card:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(20,40,80,.12)}
   .icon{flex-shrink:0;width:54px;height:54px;border-radius:14px;display:flex;
@@ -45,13 +44,23 @@
   .ctitle{font-size:16px;font-weight:700}
   .cdesc{font-size:12.5px;color:var(--sub);margin-top:2px}
   .arrow{flex-shrink:0;color:var(--accent);font-size:20px;font-weight:700}
-
-  .card.soon{opacity:.62;cursor:default;pointer-events:none}
-  .card.soon .icon{background:#eef1f5}
-  .soon-tag{flex-shrink:0;font-size:11px;font-weight:700;color:var(--sub);
-    background:#eef1f5;padding:3px 10px;border-radius:20px}
+  .lock{flex-shrink:0;color:var(--sub);font-size:15px}
 
   footer{text-align:center;font-size:11.5px;color:var(--sub);padding:20px;line-height:1.8}
+
+  .gate-overlay{position:fixed;inset:0;background:rgba(20,35,60,.55);z-index:100;
+    display:none;align-items:center;justify-content:center;padding:24px}
+  .gate-overlay.on{display:flex}
+  .gate-box{background:var(--card);border-radius:16px;padding:26px 22px;max-width:340px;
+    width:100%;text-align:center;box-shadow:0 10px 40px rgba(20,40,80,.25)}
+  .gate-box h2{font-size:16px;margin-bottom:8px}
+  .gate-box p{font-size:12.5px;color:var(--sub);margin-bottom:16px}
+  .gate-box input{width:100%;padding:12px;font-size:16px;border:1px solid var(--line);
+    border-radius:10px;text-align:center;margin-bottom:10px}
+  .gate-err{color:#c0392b;font-size:12.5px;min-height:18px;margin-bottom:6px}
+  .gate-box button{width:100%;padding:12px;font-size:15px;font-weight:700;border:none;
+    border-radius:10px;background:var(--accent);color:#fff;cursor:pointer;margin-bottom:8px}
+  .gate-box .gate-cancel{background:none;color:var(--sub);font-weight:600;margin-bottom:0}
 </style>
 </head>
 <body>
@@ -64,26 +73,6 @@
 
 <main>
 
-  <div class="sec-label">どなたでもご利用いただけます <span class="badge open">公開</span></div>
-
-  <a class="card" href="/taishokukin/">
-    <div class="icon">💰</div>
-    <div class="ctext">
-      <div class="ctitle">退職金 受取計算</div>
-      <div class="cdesc">一時金・年金など受取方法ごとの手取りをかんたんに試算</div>
-    </div>
-    <div class="arrow">›</div>
-  </a>
-
-  <div class="card soon">
-    <div class="icon">📊</div>
-    <div class="ctext">
-      <div class="ctitle">在職老齢年金 シミュレーター</div>
-      <div class="cdesc">働きながら受け取る年金の支給額を試算</div>
-    </div>
-    <div class="soon-tag">準備中</div>
-  </div>
-
   <div class="sec-label">会員向けツール <span class="badge member">合言葉が必要です</span></div>
 
   <a class="card" href="/ranking/">
@@ -95,12 +84,78 @@
     <div class="arrow">›</div>
   </a>
 
+  <div class="sec-label">テスト公開中のツール <span class="badge test">パスワードが必要です</span></div>
+
+  <div class="card" onclick="openGated('/taishokukin/')">
+    <div class="icon">💰</div>
+    <div class="ctext">
+      <div class="ctitle">退職金 受取計算</div>
+      <div class="cdesc">一時金・年金など受取方法ごとの手取りをかんたんに試算</div>
+    </div>
+    <div class="lock">🔒</div>
+  </div>
+
+  <div class="card" onclick="openGated('/zaishoku/')">
+    <div class="icon">📊</div>
+    <div class="ctext">
+      <div class="ctitle">在職老齢年金 シミュレーター</div>
+      <div class="cdesc">働きながら受け取る年金の支給額を試算</div>
+    </div>
+    <div class="lock">🔒</div>
+  </div>
+
+  <div class="card" onclick="openGated('/meishi/')">
+    <div class="icon">📇</div>
+    <div class="ctext">
+      <div class="ctitle">名刺管理</div>
+      <div class="cdesc">名刺の登録・検索・AI読み取り（Googleログインで同期）</div>
+    </div>
+    <div class="lock">🔒</div>
+  </div>
+
 </main>
 
 <footer>
   © 有限会社ビッツ（fp-bits.com）<br>
   掲載の試算値は情報提供を目的としたものであり、将来の成果を保証するものではありません。
 </footer>
+
+<div class="gate-overlay" id="gate">
+  <div class="gate-box">
+    <h2>テスト公開中のツールです</h2>
+    <p>ご利用にはパスワードが必要です。<br>お持ちでない方は作成者（薄井）までお問い合わせください。</p>
+    <input id="gpw" type="text" inputmode="text" autocomplete="off" placeholder="パスワード">
+    <div class="gate-err" id="gerr"></div>
+    <button onclick="submitGate()">開く</button>
+    <button class="gate-cancel" onclick="closeGate()">閉じる</button>
+  </div>
+</div>
+
+<script>
+  const GATE_PW = "bits2026";
+  let pendingUrl = null;
+  function norm(s){ return (s || "").trim().toLowerCase(); }
+  function openGated(url){
+    if(localStorage.getItem("fpbits_gate") === GATE_PW){ location.href = url; return; }
+    pendingUrl = url;
+    document.getElementById("gerr").textContent = "";
+    document.getElementById("gpw").value = "";
+    document.getElementById("gate").classList.add("on");
+    setTimeout(function(){ document.getElementById("gpw").focus(); }, 50);
+  }
+  function submitGate(){
+    if(norm(document.getElementById("gpw").value) === GATE_PW){
+      localStorage.setItem("fpbits_gate", GATE_PW);
+      location.href = pendingUrl;
+    } else {
+      document.getElementById("gerr").textContent = "パスワードが違います";
+    }
+  }
+  function closeGate(){ document.getElementById("gate").classList.remove("on"); }
+  document.getElementById("gpw").addEventListener("keydown", function(e){
+    if(e.key === "Enter") submitGate();
+  });
+</script>
 
 </body>
 </html>
